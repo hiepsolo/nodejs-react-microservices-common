@@ -1,6 +1,6 @@
 {
     "name": "@epitickets/common",
-    "version": "1.0.21",
+    "version": "1.0.20",
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "files": [
@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "clean": "del ./build/*",
-        "build": "del ./build/* && tsc",
+        "build": "npm run clean && tsc",
         "compile": "tsc",
         "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish && git push"
     },

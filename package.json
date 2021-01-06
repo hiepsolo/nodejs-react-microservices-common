@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "clean": "del ./build/*",
-        "build": "npm run clean && tsc",
+        "build": "del ./build/* && tsc",
         "compile": "tsc",
         "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish && git push"
     },

@@ -31,11 +31,13 @@ export const currentUser = (
     } else {
       jwtToken = (cookie.parse(req.headers.cookie))['jwt'];
     }
+    console.log('🚀 ~ file: current-user.ts ~ line 33 ~ jwtToken', jwtToken);
 
     const payload = jwt.verify(
       jwtToken,
       process.env.JWT_KEY!
     ) as UserPayload;
+    console.log('🚀 ~ file: current-user.ts ~ line 40 ~ payload', payload);
     req.currentUser = payload;
   } catch (err) {}
 

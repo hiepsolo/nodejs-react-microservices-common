@@ -36,6 +36,7 @@ export const currentUser = (
       jwtToken,
       process.env.JWT_KEY!
     ) as UserPayload;
+    console.log('🚀 ~ file: current-user.ts ~ line 39 ~ payload', payload);
     req.currentUser = payload;
   } catch (err) {}
 

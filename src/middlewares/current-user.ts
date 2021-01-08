@@ -20,8 +20,7 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('JWT', !req.session?.jwt || !req.headers.cookie);
-  if (!req.session?.jwt || !req.headers.cookie) {
+  if (!req.session?.jwt && !req.headers.cookie) {
     return next();
   }
 
@@ -30,15 +29,13 @@ export const currentUser = (
     if (req.session?.jwt) {
       jwtToken = req.session.jwt;
     } else {
-      jwtToken = (cookie.parse(req.headers.cookie))['jwt'];
+      jwtToken = (cookie.parse(req.headers.cookie!))['jwt'];
     }
-    console.log('🚀 ~ file: current-user.ts ~ line 33 ~ jwtToken', jwtToken);
 
     const payload = jwt.verify(
       jwtToken,
       process.env.JWT_KEY!
     ) as UserPayload;
-    console.log('🚀 ~ file: current-user.ts ~ line 40 ~ payload', payload);
     req.currentUser = payload;
   } catch (err) {}
 

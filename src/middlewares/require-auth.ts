@@ -6,7 +6,6 @@ export const requireAuth = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('🚀 ~ file: require-auth.ts ~ line 10 ~ req.currentUser', req.currentUser);
   if (!req.currentUser) {
     throw new NotAuthorizedError();
   }

@@ -31,7 +31,6 @@ export const currentUser = (
     } else {
       jwtToken = (cookie.parse(req.headers.cookie!))['jwt'];
     }
-    console.log('🚀 ~ file: current-user.ts ~ line 29 ~ jwtToken', jwtToken);
 
     const payload = jwt.verify(
       jwtToken,

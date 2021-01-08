@@ -19,7 +19,8 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('🚀 ~ file: current-user.ts ~ line 23 ~ req', req);
+  console.log('🚀 ~ file: current-user.ts ~ line 23 ~ req', req.session);
+  console.log('🚀 ~ file: current-user.ts ~ line 23 ~ req', req.cookie);
   if (!req.session?.jwt) {
     return next();
   }

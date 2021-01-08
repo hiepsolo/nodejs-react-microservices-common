@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import cookie from 'cookie';
 
 interface UserPayload {
   id: string;
@@ -19,15 +20,20 @@ export const currentUser = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('🚀 ~ file: current-user.ts ~ line 23 ~ req', req.session);
-  console.log('🚀 ~ file: current-user.ts ~ line 23 ~ req', req.headers);
-  if (!req.session?.jwt) {
+  if (!req.session?.jwt || !req.headers.cookie) {
     return next();
   }
 
   try {
+    let jwtToken = '';
+    if (req.session?.jwt) {
+      jwtToken = req.session.jwt;
+    } else {
+      jwtToken = (cookie.parse(req.headers.cookie))['jwt'];
+    }
+
     const payload = jwt.verify(
-      req.session.jwt,
+      jwtToken,
       process.env.JWT_KEY!
     ) as UserPayload;
     req.currentUser = payload;
